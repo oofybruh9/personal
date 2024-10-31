@@ -1,1 +1,31 @@
-#
+@font-face {
+    font-family: 'icomoon';
+    src: url('./font/icomoon.eot');
+    src: url('./font/icomoon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+            url('./font/icomoon.woff2') format('woff2'), /* Super Modern Browsers */
+            url('./font/icomoon.woff') format('woff'), /* Pretty Modern Browsers */
+            url('./font/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
+            url('./font/icomoon.svg#icomoon') format('svg'); /* Legacy iOS */
+}
+
+#player{
+    border-radius: 25px;
+    background: url(./cover.jpeg);
+    background-position: left top;
+    background-size: cover;
+    padding: 20px;
+    content-visibility: cover;
+}
+
+button {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-family: 'icomoon';
+    font-size: 100%;
+    font-variant-position: normal;
+}
+
