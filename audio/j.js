@@ -5,6 +5,8 @@ const volumeSlider = document.getElementById('volume-slider');
 const muteIconContainer = document.getElementById('mute-icon');
 let playState = 'play';
 let muteState = 'unmute';
+playIconContainer.innerText = playIconContainer.textContent = '\u{E903}';
+muteIconContainer.innerText = muteIconContainer.textContent = '\u{E900}'
 
 playIconContainer.addEventListener('click', () => {
     if(playState === 'play') {
@@ -14,7 +16,7 @@ playIconContainer.addEventListener('click', () => {
     } else {
         audio.pause();
         playState = 'play';
-        playIconContainer.innerText = playIconContainer.textContent = '\u{E903}'
+        playIconContainer.innerText = playIconContainer.textContent = '\u{E903}';
     }
 });
 
@@ -69,10 +71,6 @@ const setSliderMax = () => {
     seekSlider.max = Math.floor(audio.duration);
 }
 
-const displayBufferedAmount = () => {
-    const bufferedAmount = Math.floor(audio.buffered.end(audio.buffered.length - 1));
-    audioPlayerContainer.style.setProperty('--buffered-width', `${(bufferedAmount / seekSlider.max) * 100}%`);
-}
 
 const whilePlaying = () => {
     seekSlider.value = Math.floor(audio.currentTime);
@@ -83,16 +81,12 @@ const whilePlaying = () => {
 if (audio.readyState > 0) {
     displayDuration();
     setSliderMax();
-    displayBufferedAmount();
 } else {
     audio.addEventListener('loadedmetadata', () => {
         displayDuration();
         setSliderMax();
-        displayBufferedAmount();
     });
 }
-
-audio.addEventListener('progress', displayBufferedAmount);
 
 seekSlider.addEventListener('input', () => {
     currentTimeContainer.textContent = calculateTime(seekSlider.value);
