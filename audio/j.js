@@ -6,7 +6,7 @@ const muteIconContainer = document.getElementById('mute-icon');
 let playState = 'play';
 let muteState = 'unmute';
 playIconContainer.innerText = playIconContainer.textContent = '\u{E903}';
-muteIconContainer.innerText = muteIconContainer.textContent = '\u{E900}'
+muteIconContainer.innerText = muteIconContainer.textContent = '\u{E900}';
 
 playIconContainer.addEventListener('click', () => {
     if(playState === 'play') {

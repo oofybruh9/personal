@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url('./font/icomoon.eot');
+  src: url('./font/icomoon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+          url('./font/icomoon.woff2') format('woff2'), /* Super Modern Browsers */
+          url('./font/icomoon.woff') format('woff'), /* Pretty Modern Browsers */
+          url('./font/icomoon.ttf')  format('truetype'), /* Safari, Android, iOS */
+          url('./font/icomoon.svg#icomoon') format('svg'); /* Legacy iOS */
+}
+
 
 *, *:before, *:after {
     box-sizing: border-box;
@@ -36,6 +46,7 @@
     padding: 0;
     cursor: pointer;
     max-width: 50px;
+    font-family: 'icomoon';
   }
   .controls__slider {
     width: 10px;
@@ -63,12 +74,6 @@
     background: rgba(255,255,255,0.5);
     cursor: pointer;
     height: 15px;
-  }
-  .progress__filled {
-    width: 50%;
-    background: #00ff40;
-    flex: 0;
-    flex-basis: 0%;
   }
   
   input[type=range] {

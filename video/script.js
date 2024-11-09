@@ -1,9 +1,13 @@
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
 const video = document.querySelector(".video");
 const toggleButton = document.querySelector(".toggleButton");
 const progress = document.querySelector(".progress");
-const progressBar = document.querySelector(".progress__filled");
-const sliders = document.querySelectorAll(".contols__slider");
+const volumeSlider = document.getElementById("volume");
+const speed = document.getElementById('speed')
 const skipBtns = document.querySelectorAll("[data-skip]");
+
+toggleButton.innerHTML = toggleButton.textContent = '\u{E903}'
 
 function togglePlay() {
   if (video.paused || video.ended) {
@@ -14,17 +18,11 @@ function togglePlay() {
 }
 
 function updateToggleButton() {
-  toggleButton.innerHTML = video.paused ? "►" : "❚ ❚";
+  toggleButton.innerHTML = video.paused ? "\u{E903}" : "\u{E902}";
 }
 
-function handleProgress() {
-  const progressPercentage = (video.currentTime / video.duration) * 100;
-  progressBar.style.flexBasis = `${progressPercentage}%`;
-}
-
-function scrub(e) {
-  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
-  video.currentTime = scrubTime;
+function handleProgress(){
+  video.addEventListener('loadedmetadata', () => {progress.max = video.duration;});
 }
 
 function handleSliderUpdate() {
@@ -40,9 +38,18 @@ video.addEventListener("click", togglePlay);
 video.addEventListener("play", updateToggleButton);
 video.addEventListener("pause", updateToggleButton);
 video.addEventListener("timeupdate", handleProgress);
+video.addEventListener('loadedmetadata', () => {progress.max = video.duration;});
 
-sliders.forEach((slider) => {
-  slider.addEventListener("change", handleSliderUpdate);
+volumeSlider.addEventListener('input', (e) => {
+  const value = e.target.value;
+
+  video.volume = value / 100;
+});
+
+speed.addEventListener('input', (e) =>{
+  const value = e.target.value;
+
+  video.playbackRate = value;
 });
 
 skipBtns.forEach((btn) => {
@@ -50,15 +57,27 @@ skipBtns.forEach((btn) => {
 });
 
 let mousedown = false;
-progress.addEventListener("click", scrub);
-progress.addEventListener("mousedown", () => (mousedown = true));
-progress.addEventListener("mousemove", (e) => mousedown && scrub(e));
-progress.addEventListener("mouseup", () => (mousedown = false));
+progress.addEventListener('input', () => {video.currentTime = progress.value;});
 
-sliders.forEach((slider) => {
-  slider.addEventListener("change", handleSliderUpdate);
+volumeSlider.addEventListener('input', (e) => {
+  const value = e.target.value;
+
+  video.volume = value / 100;
+});
+
+speed.addEventListener('input', (e) =>{
+  const value = e.target.value;
+
+  video.playbackRate = value;
 });
 
 document.addEventListener("keydown", (e) => {
-  if (e.code === "Space") togglePlay();
+  if (e.code === "Space") {
+    togglePlay();
+    sleep(50);
+  }
+  if (e.code === "KeyK"){
+    togglePlay();
+    sleep(50);
+  }
 });
